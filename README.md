@@ -25,4 +25,4 @@ from mouse_keyboard import *
 ```
 
 ：![](GIF.gif)
-![](GIF.gif)
+
