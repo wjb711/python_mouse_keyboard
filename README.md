@@ -24,3 +24,5 @@ from mouse_keyboard import *
 热键双键('alt','f4')
 ```
 
+：![](GIF.gif)
+![](GIF.gif)
