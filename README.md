@@ -11,6 +11,7 @@
 
 举个例子 
 # 先倒入模块， 后面纯中文输入，等待一张图片的出现，出现后鼠标移过去，单击，输入文字，热键等
+
 推荐 使用picpick作为截图工具，存为png格式， 最好不是jpg
 ```javascript
 from mouse_keyboard import *
