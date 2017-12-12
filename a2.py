@@ -1,8 +1,12 @@
 from mouse_keyboard import *
 等待图片('input.png')
+等待时间(1)
 移到图片('input.png')
+等待时间(1)
 右键单击()
+等待时间(1)
 键盘输入('notepad.exe')
+等待时间(1)
 热键('enter')
-等待时间(2)
+等待时间(1)
 热键双键('alt','f4')
