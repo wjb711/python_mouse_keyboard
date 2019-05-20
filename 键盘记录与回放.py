@@ -91,9 +91,18 @@ def key_change(key):
     elif str(key) == 'Key.pause':
 
         return Key.pause
+    elif str(key) == 'Key.delete':
+
+        return Key.delete
+    elif str(key) == 'Key.insert':
+
+        return Key.insert
     elif str(key) == ',':
 
         return '.'
+    elif str(key) == '\\\\':
+
+        return '/'
     else:
         print('not all', key)
         return key
@@ -133,8 +142,10 @@ def on_press(key):
         #keyboard1.release('A')
         if str(key).startswith('Key'):
             print(str(key),'hotkey','pressed',delta_time)
-
-            list0.append([str(key),'hotkey','pressed',delta_time])
+            if str(key)=='Key.esc':
+                pass
+            else:
+                list0.append([str(key),'hotkey','pressed',delta_time])
         else:
             print(str(key).replace(',','.'),'normal_key','pressed',delta_time)
 
@@ -174,15 +185,15 @@ def on_release(key):
 
     a=datetime.datetime.now()
     #print('keytype',type(key))
-    if key == keyboard.Key.pause:
+    if key == keyboard.Key.insert:
 
-
-        pic=input('pic_name?:')
-        list0.append([pic,'pic','pic',5])
+        list0.append('breakpoint')
+        #pic=input('pic_name?:')
+        #list0.append([pic,'pic','pic',5])
         
     if key == keyboard.Key.esc:
-        with open('1.txt','w') as f:
-            f.write(str(list0))
+        #with open('1.txt','w') as f:
+        #    f.write(str(list0))
 
         return False
         
@@ -225,6 +236,12 @@ def find_pic(pic):
  
 
 if __name__=='__main__':
+    Y=time.strftime("%Y")
+    m=time.strftime("%m")
+    d=time.strftime("%d")
+    H=time.strftime("%H")
+    M=time.strftime("%M")
+    S=time.strftime("%S")
 
     keyboard1 = Controller()
     if len(sys.argv)==1:
@@ -250,33 +267,40 @@ if __name__=='__main__':
                 f.write(str(i).strip('[').strip(']').replace('\'','').replace(' ','').replace('\"','')+'\n')
     else:
         file=sys.argv[1]
-        time.sleep(2)
+        time.sleep(3)
         with open(file,'r') as f:
             lines=f.readlines()
         #print(lines)
         for x in lines:
-            #print(x)
-            y=x.split(',')
-            print(y[0])
-            key=key_change(y[0])
-            time0=float(y[3].replace('\n',''))
-            time.sleep(time0)
-            if y[2]=='pressed':
-                print('p')
-                keyboard1.press(key)
+            print('here:',x[:10])
+            if x[:10]=='breakpoint':
+                print('lookhere,',x)
+                pass
+            else:
+                #print(x)
+                y=x.split(',')
+                print(y[0])
+                key=key_change(y[0])
+                time0=float(y[3].replace('\n',''))
+                time.sleep(time0)
+                if y[2]=='pressed':
+                    print('p')
+                    keyboard1.press(key)
+                    
+                    
+                if y[2]=='released':
+                    print('r')
+                    keyboard1.release(key)
+                if y[2]=='pic':
+                    print('pic')
+                    find_pic(y[0])
+                if y[2]=='string':
+                    print('string')
+                    new_y0=y[0].replace("$Y",Y).replace("$m",m).replace("$d",d).replace("$H",H).replace("$M",M).replace("$S",S)
+                    p.typewrite(new_y0,interval=0.25)
+                    #find_pic(y[0])
+
                 
-                
-            if y[2]=='released':
-                print('r')
-                keyboard1.release(key)
-            if y[2]=='pic':
-                print('pic')
-                find_pic(y[0])
-    
-                #    keyboard1.release(y0)
-                #except:
-                #    pass
-                #time.sleep(float(y[1]))
-                
+
 
 
