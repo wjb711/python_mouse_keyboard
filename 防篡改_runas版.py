@@ -41,7 +41,8 @@ if button=="新增":
     print('here we go!')
     
     g.msgbox(msg='防篡改文件上传成功', title=' ', ok_button='OK', image=None, root=None)
-    command='runas.exe /user:{} /savecred  "python log.py {} {}" '.format(username,full_file_path,'upload')
+    command='runas.exe /user:{} /env /savecred  "python log.py {} {}" '.format(username,full_file_path,'upload')
+    print(command)
     returnmassage=os.popen(command,'r').read()
     print(returnmassage)
 
@@ -64,7 +65,7 @@ elif button=="删除":
         print('nothing')
     else:
         print('***',returnmassage,'***')
-    command='runas.exe /user:{} /savecred "python log.py {} {}"'.format(username,full_file_path,'delete')
+    command='runas.exe /user:{} /env /savecred "python log.py {} {}"'.format(username,full_file_path,'delete')
     returnmassage=os.popen(command,'r').read()
     print(returnmassage)
     
